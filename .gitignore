@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# mac things
+.DS_Store
+
+*.js
