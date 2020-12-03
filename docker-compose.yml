@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  server:
+    build: server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - REDIS_URL=redis://cache
+    restart: unless-stopped
+    networks:
+      - lengoo
+
+  tms:
+    build: tms
+    ports: 
+      - "3001:3001"
+    restart: unless-stopped
+    networks:
+      - lengoo
+
+  redis:
+    image: redis
+    container_name: cache
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - lengoo
+
+networks:
+  lengoo:
+    driver: bridge

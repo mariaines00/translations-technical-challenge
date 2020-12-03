@@ -101,3 +101,20 @@ Feel free to define yourself the API contracts and the project structure.
 - Usage of Docker.
 
 We wish you the best of lucks 🙏! 
+
+----
+
+## Running the project
+
+0. have docker and docker-compose installed
+1. clone the repo
+2. navigate to the directory containing the docker-compose.yml file
+3. run ``docker-compose up -d --build`` or ``./start.sh``
+4. Use [postman](https://www.getpostman.com/) or an equivalent software to make use of the endpoints like explained below
+
+## Endpoints
+ ... wip ...
+- POST /submit
+
+### Extra considerations and _smart_ Maria Inês decisions
+ ... i have none so far
