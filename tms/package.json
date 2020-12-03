@@ -1,0 +1,32 @@
+{
+  "name": "backend-coding-challenge-maria-ines-serra-tms",
+  "version": "1.0.0",
+  "description": "Backend technical challenge for lengoo",
+  "main": "index.js",
+  "author": "mariaines00",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon dist/index.js",
+    "start": "concurrently npm:start:*",
+    "build": "tsc",
+    "run:prod": "node ./dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "fastest-levenshtein": "^1.0.12",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cookie-session": "^2.0.41",
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.9",
+    "concurrently": "^5.3.0",
+    "nodemon": "^1.19.4",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.2"
+  }
+}
