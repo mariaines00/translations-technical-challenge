@@ -1,7 +1,5 @@
-wip
+__wip__
 
-### How to run
+This is the server with the REST endpoints to both receive user files/data and notify the user when translations complete;
 
-`` ./start.sh ``
-
-^ Builds and runs the docker container
+### routes
