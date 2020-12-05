@@ -17,11 +17,10 @@ export class Line {
         return this.end;
     }   
 }
-
 export class SubtitlesFile {
     private lines: Line[] = [];
 
-    constructor(input: string[]) {
+    constructor(input: string[], private client_email: string) {
        input.forEach(e => {
            if(!e.length) {
                 return;
@@ -40,4 +39,9 @@ export class SubtitlesFile {
     public get getLines() : Line[] {
         return this.lines;
     }
+
+    public get getClientEmail() : string {
+        return this.client_email;
+    }
+    
 }

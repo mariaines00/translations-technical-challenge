@@ -1,5 +1,7 @@
 import { RequestHandler, Request, Response, NextFunction } from 'express';
 
+import { jsonRedis } from './../configs/redis';
+
 import { SubtitlesFile } from './../models/Subtitles';
 
 export const submitFile: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
@@ -7,16 +9,22 @@ export const submitFile: RequestHandler = (req: Request, res: Response, next: Ne
         res.sendStatus(400);
         return;
     }
+
+    const mail = "fake@email.com"
     
     const raw: string[] = req.body.split(/\r?\n/);
-    const file = new SubtitlesFile(raw);
+    const file = new SubtitlesFile(raw, mail);
+    const lines = file.getLines;
 
-    if(!file.getLines.length) {
+    if(!lines.length) {
         res.sendStatus(400);
         return;
     }
 
-    res.status(200).send(file);
+    jsonRedis.set(mail, file).then( () => {
+        res.status(200).send(file);
+    });
+
 };
 
 function isEmpty(o: Object){

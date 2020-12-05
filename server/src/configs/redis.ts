@@ -1,5 +1,6 @@
-const redis = require('redis');
+import * as redis from 'redis';
+import JSONCache from 'redis-json';
 
-const redisClient = redis.createClient(process.env.REDIS_URL);
+export const redisClient = redis.createClient(process.env.REDIS_URL as string);
 
-export default redisClient;
+export const jsonRedis = new JSONCache<{}>(redisClient);
