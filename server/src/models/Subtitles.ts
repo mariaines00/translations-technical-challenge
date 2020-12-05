@@ -23,6 +23,9 @@ export class SubtitlesFile {
 
     constructor(input: string[]) {
        input.forEach(e => {
+           if(!e.length) {
+                return;
+           }
            const data = e.split(" ", 4);
            const line = new Line(
                +data[0],
