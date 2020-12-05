@@ -1,4 +1,4 @@
-class Line {
+export class Line {
     constructor(private index: number, private start: string, private end: string, private text: string) { }
 
     public get getLineNumber() : number {
@@ -18,7 +18,7 @@ class Line {
     }   
 }
 
-class SubtitlesFile {
+export class SubtitlesFile {
     private lines: Line[] = [];
 
     constructor(input: string[]) {
@@ -27,7 +27,7 @@ class SubtitlesFile {
            const line = new Line(
                +data[0],
                data[1].substring(1),
-               data[4].slice(0, -1),
+               data[3].slice(0, -1),
                e.split("] ")[1]
            )
         this.lines.push(line);
