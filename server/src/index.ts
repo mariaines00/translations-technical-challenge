@@ -20,6 +20,11 @@ process.on('unhandledRejection', e => {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+  return;
+});
 app.use(text());
 app.use('/submit', submitRoutes);
 app.use('/notify', notifyRoutes);
