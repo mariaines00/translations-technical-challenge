@@ -19,7 +19,11 @@ services:
     build: tms
     ports: 
       - "3001:3001"
+    environment: 
+      - REDIS_URL=redis://cache
     restart: unless-stopped
+    depends_on: 
+      - redis
 
   redis:
     image: redis
