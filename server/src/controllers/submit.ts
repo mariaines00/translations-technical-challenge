@@ -10,7 +10,12 @@ export const submitFile: RequestHandler = (req: Request, res: Response, next: Ne
         return;
     }
 
-    const mail = "fake@email.com"
+    if(isEmpty(req.query) || req.query.email === "") {
+        res.sendStatus(400);
+        return;
+    }
+    
+    const mail = req.query.email!.toString();
     
     const raw: string[] = req.body.split(/\r?\n/);
     const file = new SubtitlesFile(raw, mail);
