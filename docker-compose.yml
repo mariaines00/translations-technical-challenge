@@ -8,6 +8,8 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
+      - TMS_URL=tms
+      - TMS_PORT=3001
       - REDIS_URL=redis://cache
     restart: unless-stopped
     depends_on: 

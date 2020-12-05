@@ -1,8 +1,8 @@
 import { RequestHandler, Request, Response, NextFunction } from 'express';
 
 import { jsonRedis } from './../configs/redis';
-
 import { SubtitlesFile } from './../models/Subtitles';
+import alertTMS  from './../services/tms';
 
 export const submitFile: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
     if (isEmpty(req.body)) {
@@ -26,13 +26,13 @@ export const submitFile: RequestHandler = (req: Request, res: Response, next: Ne
         return;
     }
 
-    jsonRedis.set(mail, file).then( () => {
+    jsonRedis.set(mail, file).then(() => {
         res.status(200).send(file);
-    });
-
+        alertTMS(mail);
+   });
 };
 
-function isEmpty(o: Object){
+function isEmpty(o: Object) {
     for(var i in o){
         if(o.hasOwnProperty(i)){
             return false;

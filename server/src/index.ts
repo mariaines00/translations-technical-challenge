@@ -1,8 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
+import { text } from 'body-parser';
+
+import { redisClient } from './configs/redis';
+
 import submitRoutes from './routes/submit';
 import notifyRoutes from './routes/notify';
-import { text } from 'body-parser';
-import { redisClient } from './configs/redis';
 
 process.on('uncaughtException', e => {
   console.log(e);
@@ -37,5 +39,4 @@ app.listen(PORT, () => {
   redisClient.on('error', function (err: Error) {
     console.log('Something went wrong ' + err);
   });
-  
 });
