@@ -27,8 +27,15 @@ export const submitFile: RequestHandler = (req: Request, res: Response, next: Ne
         return;
     }
 
-    jsonRedis.set(mail, file).then(() => {
-        res.status(200).send(file);
+    jsonRedis.set(mail, file).then( () => {
+        res.sendStatus(200);
         alertTMS(mail);
-   });
+        return;
+    })
+    .catch( (err) => {
+        res.sendStatus(500);
+        console.log(err);
+        return;
+    });
+
 };

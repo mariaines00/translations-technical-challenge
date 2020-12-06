@@ -1,5 +1,5 @@
 export class Line {
-    constructor(private index: number, private start: string, private end: string, private text: string) { }
+    constructor(public index: number, public start: string, public end: string, public text: string) { }
 
     public get getLineNumber() : number {
         return this.index;
@@ -18,9 +18,9 @@ export class Line {
     }   
 }
 export class SubtitlesFile {
-    private lines: Line[] = [];
+    lines: Line[] = [];
 
-    constructor(input: string[], private client_email: string) {
+    constructor(input: string[], public client_email: string) {
        input.forEach(e => {
            if(!e.length) {
                 return;
