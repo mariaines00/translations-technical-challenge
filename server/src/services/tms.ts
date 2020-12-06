@@ -1,6 +1,6 @@
 import * as http from 'http';
 
-function alertTMS(email_key: string): void | Error {
+export function alertTMS(email_key: string): void | Error {
     const options = {
         host: process.env.TMS_URL,
         port: process.env.TMS_PORT,
@@ -25,5 +25,3 @@ function alertTMS(email_key: string): void | Error {
     req.write(email_key);
     req.end();
 }
-
-export default alertTMS;
