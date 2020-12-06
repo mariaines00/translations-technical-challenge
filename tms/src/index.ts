@@ -25,8 +25,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   return;
 });
 app.use(json());
-app.use('/submit', translateRoutes);
-app.use('/notify', importRoutes);
+app.use('/translate', translateRoutes);
+app.use('/import', importRoutes);
 
 //error handler middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -43,5 +43,4 @@ app.listen(PORT, () => {
   redisClient.on('error', function (err: Error) {
     console.log('Something went wrong ' + err);
   });
-
 });
