@@ -103,7 +103,7 @@ Feel free to define yourself the API contracts and the project structure.
 We wish you the best of lucks 🙏! 
 
 ----
-
+----
 ## Running the project
 
 0. have docker and docker-compose installed
@@ -111,10 +111,21 @@ We wish you the best of lucks 🙏!
 2. navigate to the directory containing the docker-compose.yml file
 3. run ``docker-compose up -d --build`` or ``./start.sh``
 4. Use [postman](https://www.getpostman.com/) or an equivalent software to make use of the endpoints like explained below
-
+5. [mailtrap project](https://mailtrap.io/share/854980/76f94f46f1d04131eeae79a3639984a0) -> to see the resulting emails
 ## Endpoints
- ... wip ...
-- POST /submit
 
-### Extra considerations and _smart_ Maria Inês decisions
- ... i have none so far
+- POST _localhost:3000_/submit?email={valid email}
+  - to submit the text of the subtitles file (starts the translation process)
+
+- POST _localhost:30001_/import
+  - to import the translation json data
+
+- There are two other endpoints that are used internally:
+  - POST _localhost:3000_/notify?email={valid email}
+    - SMT will call this one when the translations are done so that the email can be notified
+
+  - POST _localhost:30001_/translate
+    - the server calls this one to start the translation process on SMT
+
+### Extra considerations and decisions
+Instead of using the 'internal' endpoints the better alternative would be to use a message queue(like kafka) and have each node subscribe to the wanted events.
