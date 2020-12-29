@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  server:
+    build: server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - TMS_URL=tms
+      - TMS_PORT=3001
+      - REDIS_URL=redis://cache
+    restart: unless-stopped
+    depends_on: 
+      - redis
+
+  tms:
+    build: tms
+    ports: 
+      - "3001:3001"
+    environment: 
+      - REDIS_URL=redis://cache
+      - SERVER_URL=server
+      - SERVER_PORT=3000
+    restart: unless-stopped
+    depends_on: 
+      - redis
+
+  redis:
+    image: redis
+    container_name: cache
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    command: ["redis-server", "--bind", "redis", "--port", "6379", "--appendonly", "yes"]
+    volumes:
+      - ../data/redis:/data
