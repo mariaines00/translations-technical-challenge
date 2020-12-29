@@ -1,27 +1,33 @@
 # Coding challenge
 
-Hi Maria Ines!
+## Running the project
 
-Thanks for taking your time to work on this coding challenge.
+0. have docker and docker-compose installed
+1. clone the repo
+2. navigate to the directory containing the docker-compose.yml file
+3. run ``docker-compose up -d --build`` or ``./start.sh``
+4. Use [postman](https://www.getpostman.com/) or an equivalent software to make use of the endpoints like explained below
+5. [mailtrap project](https://mailtrap.io/share/854980/76f94f46f1d04131eeae79a3639984a0) -> to see the resulting emails
+## Endpoints
 
-Ideally this test should take a day or two. But feel free to take as much time as you need. Quality is more important than speed. Latest delivery though is in one week starting now.
+- POST _localhost:3000_/submit?email={valid email}
+  - to submit the text of the subtitles file (starts the translation process)
 
-This coding challenge will show us some of your skills. And you get to know our work flow as well. The solution of the challenge is not too hard. So you can focus on technology and code. Show us what you got! 😉
+- POST _localhost:30001_/import
+  - to import the translation json data
 
-## Todo
+- There are two other endpoints that are used internally:
+  - POST _localhost:3000_/notify?email={valid email}
+    - SMT will call this one when the translations are done so that the email can be notified
 
-1. Clone this repo.
-2. Create a new development branch.
-3. Use as many commits as you can so we can see your progress.
-4. After finishing your work, create a Pull Request to the master branch.
-5. Be ready to answer question.
+  - POST _localhost:30001_/translate
+    - the server calls this one to start the translation process on SMT
 
-## Requirements
+Diagram:
+![Copy of Copy of Untitled](https://user-images.githubusercontent.com/14142563/101345340-d1b0ed00-387e-11eb-8a47-41c6548e9677.png)
 
-- The task must be developed in NodeJS.
-- Write tests where applicable/necessary.
-- All code as well as documentation or comments must be in english.
-- Provide instructions on how to run the project.
+-----
+-----
 
 ## Business description
 
@@ -91,41 +97,3 @@ Your task is:
 2. Create the TMS either inside or outside the document translator (however you feel is the best way) with the two endpoints stated before.
 
 Feel free to define yourself the API contracts and the project structure.
-
-## Bonus point
-
-- Creativity.
-- Clean code.
-- Usage of best practices.
-- Usage of Typescript.
-- Usage of Docker.
-
-We wish you the best of lucks 🙏! 
-
-----
-----
-## Running the project
-
-0. have docker and docker-compose installed
-1. clone the repo
-2. navigate to the directory containing the docker-compose.yml file
-3. run ``docker-compose up -d --build`` or ``./start.sh``
-4. Use [postman](https://www.getpostman.com/) or an equivalent software to make use of the endpoints like explained below
-5. [mailtrap project](https://mailtrap.io/share/854980/76f94f46f1d04131eeae79a3639984a0) -> to see the resulting emails
-## Endpoints
-
-- POST _localhost:3000_/submit?email={valid email}
-  - to submit the text of the subtitles file (starts the translation process)
-
-- POST _localhost:30001_/import
-  - to import the translation json data
-
-- There are two other endpoints that are used internally:
-  - POST _localhost:3000_/notify?email={valid email}
-    - SMT will call this one when the translations are done so that the email can be notified
-
-  - POST _localhost:30001_/translate
-    - the server calls this one to start the translation process on SMT
-
-### Extra considerations and decisions
-Instead of using the 'internal' endpoints the better alternative would be to use a message queue(like kafka) and have each node subscribe to the wanted events.
